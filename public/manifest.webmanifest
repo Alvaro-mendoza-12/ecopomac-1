@@ -1,0 +1,25 @@
+{
+  "name": "EcoPómac",
+  "short_name": "EcoPómac",
+  "description": "Plataforma educativa sobre deforestación y conservación del Bosque de Pómac (Perú).",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060a09",
+  "theme_color": "#34d399",
+  "lang": "es-PE",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
+

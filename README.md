@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# EcoPómac
 
-## Getting Started
+Aplicación web **moderna, interactiva y educativa** sobre la deforestación y conservación del **Santuario Histórico Bosque de Pómac (Lambayeque, Perú)**.  
+Proyecto universitario para el curso de Ecología integrando Ingeniería de Sistemas y conciencia ambiental.
 
-First, run the development server:
+## Módulos
+
+- **Landing + CTA**: frase central “La tecnología al servicio de la conservación ambiental.”
+- **Simulador de deforestación (2000–2030)**: animaciones fluidas con Framer Motion y estadísticas dinámicas.
+- **Mapa interactivo**: Leaflet + capas educativas (zonas afectadas, flora, fauna, áreas protegidas).
+- **Juego educativo “Salva el Bosque”**: decisiones que afectan biodiversidad, agua, CO₂ y economía.
+- **Calculadora de huella ecológica**: transporte, papel, energía → puntaje ambiental.
+- **Panel estadístico**: Recharts con métricas (ha perdidas, especies afectadas, CO₂).
+- **Sistema de reportes**: formulario + API (`/api/reports`) para demo.
+- **QR integrado**: generación + descarga SVG.
+- **Dark mode**, **SEO** (`robots.txt`, `sitemap.xml`) y **PWA** (manifest + service worker en build).
+- **Ranking** (demo local) y **Certificados** imprimibles (PDF vía navegador).
+
+## Tech stack
+
+- **Next.js (App Router)** + **React** + **TypeScript strict**
+- **Tailwind CSS**
+- **Framer Motion**, **Leaflet / React-Leaflet**, **Recharts**
+- **Zod** + **React Hook Form**
+- **next-themes** (Dark Mode)
+- **next-pwa** (PWA)
+
+## Arquitectura (carpetas)
+
+- `src/app/`: rutas (landing y módulos)
+- `src/components/`: UI reutilizable (layout + UI primitives)
+- `src/features/`: lógica por módulo (simulador, mapa, juego, huella, stats, reportes)
+- `src/lib/`: utilidades (`cn`, constantes, etc.)
+- `public/`: íconos PWA y manifest
+
+## Instalación
+
+Requisitos: **Node.js 20+** y npm.
+
+```bash
+cd ecopomac
+npm install
+npm run dev
+```
+
+Configura Supabase en `ecopomac/.env.local` (ver `SUPABASE_SETUP.md`):
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=https://<PROJECT_REF>.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<ANON_PUBLIC_KEY>
+```
+
+Luego:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build (producción)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## Despliegue en Vercel
 
-To learn more about Next.js, take a look at the following resources:
+- **Build Command**: `npm run build`
+- **Output**: (por defecto Next.js)
+- **Framework preset**: Next.js
+- **Node version**: 20+
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Notas:
+- El endpoint `/api/reports` guarda en archivo local para **demo**; en Vercel el filesystem puede ser **efímero**. Para producción, usar DB (Postgres/SQLite/Supabase).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Licencia / Aviso
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Uso educativo. Los datos son **referenciales** para simulación y presentación universitaria (no oficiales).
