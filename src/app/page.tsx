@@ -1,152 +1,277 @@
-import { ArrowRight, Shield, Sprout, Waves } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  ArrowRight,
+  MapPinned,
+  PlayCircle,
+  ShieldCheck,
+  Sprout,
+  Trophy,
+  Trees,
+} from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Container } from "@/components/layout/Container";
+import { ECO_POMAC } from "@/lib/constants";
+import { HOME_METRICS, HOME_SPOTLIGHTS, POMAC_MEDIA } from "@/lib/pomacMedia";
+
+const featurePills = [
+  {
+    icon: Trees,
+    label: "Bosque seco",
+    text: "Paisaje, flora y fauna del santuario.",
+  },
+  {
+    icon: ShieldCheck,
+    label: "Conservación",
+    text: "Retos, decisiones y participación ciudadana.",
+  },
+  {
+    icon: Trophy,
+    label: "Juego + ranking",
+    text: "Puntaje local y global conectado con certificados.",
+  },
+] as const;
 
 export default function Home() {
   return (
-    <div className="relative min-h-[calc(100vh-0px)] overflow-hidden">
+    <div className="relative overflow-hidden">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(1000px_600px_at_20%_15%,rgba(52,211,153,0.22),transparent_60%),radial-gradient(900px_500px_at_85%_20%,rgba(163,230,53,0.14),transparent_55%),radial-gradient(900px_600px_at_50%_110%,rgba(176,137,104,0.20),transparent_55%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(1100px_650px_at_12%_8%,rgba(52,211,153,0.20),transparent_58%),radial-gradient(950px_580px_at_88%_18%,rgba(163,230,53,0.12),transparent_54%),radial-gradient(900px_650px_at_48%_102%,rgba(176,137,104,0.18),transparent_58%)]"
       />
       <div aria-hidden="true" className="noise absolute inset-0 opacity-70" />
 
-      <Container className="relative pt-20 pb-14">
-        <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+      <Container className="relative py-12 sm:py-16 lg:py-20">
+        <section className="grid items-start gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
           <div className="space-y-6">
             <p className="inline-flex items-center gap-2 rounded-full border border-border bg-white/6 px-4 py-2 text-xs text-muted-foreground backdrop-blur">
-              Santuario Histórico Bosque de Pómac · Lambayeque, Perú
+              {ECO_POMAC.name} · {ECO_POMAC.region}
             </p>
-            <h1 className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
-              La tecnología al servicio de la conservación ambiental.
-            </h1>
-            <p className="max-w-xl text-pretty text-base leading-7 text-muted-foreground sm:text-lg">
-              EcoPómac integra visualización de datos, simulación, cartografía
-              interactiva y aprendizaje basado en decisiones para comprender la
-              deforestación y actuar.
-            </p>
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <ButtonLink href="/explorar" size="lg">
-                Explorar EcoPómac <ArrowRight className="h-4 w-4" />
+
+            <div className="space-y-4">
+              <h1 className="max-w-3xl text-balance text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
+                Aprende el Bosque de Pómac con imágenes reales, video y retos interactivos.
+              </h1>
+              <p className="max-w-2xl text-pretty text-base leading-7 text-muted-foreground sm:text-lg">
+                EcoPómac ahora conecta la exploración visual del santuario con un
+                juego más dinámico, simulación ambiental, ranking y generación de
+                certificados en una experiencia optimizada para escritorio y móvil.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+              <ButtonLink href="/juego" size="lg">
+                Jugar desafío Bosque de Pómac <PlayCircle className="h-4 w-4" />
               </ButtonLink>
-              <ButtonLink href="/reportes" variant="secondary" size="lg">
-                Reportar incidencia
+              <ButtonLink href="/explorar" variant="secondary" size="lg">
+                Explorar el santuario <ArrowRight className="h-4 w-4" />
               </ButtonLink>
             </div>
-            <div className="grid gap-3 pt-6 sm:grid-cols-3">
-              <Card>
-                <CardContent className="flex items-start gap-3">
-                  <span className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-emerald-400/15 text-emerald-200">
-                    <Sprout className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <div>
-                    <p className="text-sm font-medium">Educación</p>
-                    <p className="text-xs text-muted-foreground">
-                      Aprende con simulaciones y datos.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="flex items-start gap-3">
-                  <span className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-emerald-400/15 text-emerald-200">
-                    <Waves className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <div>
-                    <p className="text-sm font-medium">Impacto</p>
-                    <p className="text-xs text-muted-foreground">
-                      Visualiza agua, CO₂ y biodiversidad.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="flex items-start gap-3">
-                  <span className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-emerald-400/15 text-emerald-200">
-                    <Shield className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <div>
-                    <p className="text-sm font-medium">Acción</p>
-                    <p className="text-xs text-muted-foreground">
-                      Reporta y participa en retos.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
+
+            <div className="grid gap-3 sm:grid-cols-3">
+              {HOME_METRICS.map((metric) => (
+                <Card key={metric.value} className="border-white/10 bg-white/5">
+                  <CardContent className="space-y-2 p-4">
+                    <p className="text-sm font-semibold text-emerald-100">{metric.value}</p>
+                    <p className="text-sm text-muted-foreground">{metric.label}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            <div className="grid gap-3 md:grid-cols-3">
+              {featurePills.map((item) => (
+                <Card key={item.label} className="border-white/10 bg-black/20">
+                  <CardContent className="flex gap-3 p-4">
+                    <span className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-emerald-400/15 text-emerald-200">
+                      <item.icon className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium">{item.label}</p>
+                      <p className="text-xs leading-5 text-muted-foreground">{item.text}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
 
-          <div className="relative">
-            <div className="absolute -inset-3 rounded-[2.5rem] bg-[radial-gradient(closest-side,rgba(52,211,153,0.18),transparent)] blur-2xl" />
-            <Card className="relative overflow-hidden">
+          <div className="grid gap-4">
+            <Card className="overflow-hidden border-white/10 bg-black/30">
               <CardContent className="p-0">
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-[radial-gradient(600px_300px_at_15%_20%,rgba(52,211,153,0.35),transparent_60%),radial-gradient(600px_300px_at_75%_20%,rgba(163,230,53,0.22),transparent_60%),linear-gradient(to_bottom,rgba(2,6,5,0.10),rgba(2,6,5,0.55))]"
-                  />
-                  <div
-                    aria-hidden="true"
-                    className="absolute -left-16 -top-12 h-64 w-64 rounded-full bg-emerald-400/18 blur-3xl animate-[pulse_6s_ease-in-out_infinite]"
-                  />
-                  <div
-                    aria-hidden="true"
-                    className="absolute -right-20 top-12 h-72 w-72 rounded-full bg-lime-300/14 blur-3xl animate-[pulse_7s_ease-in-out_infinite]"
-                  />
-                  <div className="relative h-full w-full">
-                    <svg
-                      viewBox="0 0 900 675"
-                      className="h-full w-full"
-                      role="img"
-                      aria-label="Ilustración abstracta inspirada en el bosque"
-                    >
-                      <defs>
-                        <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-                          <stop offset="0" stopColor="rgba(52,211,153,0.30)" />
-                          <stop offset="1" stopColor="rgba(176,137,104,0.18)" />
-                        </linearGradient>
-                      </defs>
-                      <rect width="900" height="675" fill="rgba(255,255,255,0.02)" />
-                      <path
-                        d="M0,520 C120,450 220,480 320,520 C430,565 520,560 640,510 C760,455 830,470 900,510 L900,675 L0,675 Z"
-                        fill="url(#g)"
-                        opacity="0.9"
-                      />
-                      <path
-                        d="M0,560 C150,520 260,540 360,575 C480,620 590,610 720,570 C820,540 860,545 900,560"
-                        fill="rgba(52,211,153,0.18)"
-                      />
-                      <path
-                        d="M110,520 C130,410 190,360 230,300 C280,225 305,165 330,120"
-                        stroke="rgba(52,211,153,0.35)"
-                        strokeWidth="10"
-                        fill="none"
-                        strokeLinecap="round"
-                      />
-                      <path
-                        d="M670,530 C650,430 600,380 565,330 C520,265 495,205 470,155"
-                        stroke="rgba(163,230,53,0.25)"
-                        strokeWidth="10"
-                        fill="none"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <p className="text-sm font-medium">
-                      Bosques secos del norte del Perú
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <video
+                    className="h-full w-full object-cover"
+                    controls
+                    playsInline
+                    preload="metadata"
+                    poster={POMAC_MEDIA.heroPoster}
+                  >
+                    <source src={POMAC_MEDIA.heroVideo} type="video/mp4" />
+                    Tu navegador no soporta video HTML5.
+                  </video>
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                    <p className="text-xs uppercase tracking-[0.3em] text-emerald-100/80">
+                      Recorrido audiovisual
                     </p>
-                    <p className="text-xs text-muted-foreground">
-                      Experiencia inmersiva + animaciones premium.
+                    <p className="mt-2 max-w-md text-lg font-semibold sm:text-xl">
+                      Video integrado desde la carpeta IMG para presentar el paisaje real del santuario.
                     </p>
                   </div>
                 </div>
               </CardContent>
             </Card>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Card className="overflow-hidden border-white/10 bg-white/5">
+                <CardContent className="p-0">
+                  <div className="relative aspect-[4/5] overflow-hidden">
+                    <Image
+                      src={POMAC_MEDIA.panorama}
+                      alt="Vista panorámica del Bosque de Pómac"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 p-5">
+                      <p className="text-xs uppercase tracking-[0.25em] text-emerald-100/75">
+                        Territorio vivo
+                      </p>
+                      <p className="mt-2 text-lg font-semibold">
+                        Bosque seco, corredores biológicos y patrimonio Sicán.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border-white/10 bg-gradient-to-br from-emerald-400/12 via-black/25 to-amber-300/10">
+                <CardContent className="flex h-full flex-col justify-between gap-5 p-5">
+                  <div className="space-y-3">
+                    <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/6 px-3 py-1 text-xs text-muted-foreground">
+                      <MapPinned className="h-3.5 w-3.5" aria-hidden="true" />
+                      Experiencia conectada
+                    </div>
+                    <h2 className="text-2xl font-semibold tracking-tight">
+                      Del video al reto, y del reto al certificado.
+                    </h2>
+                    <p className="text-sm leading-6 text-muted-foreground">
+                      La portada ahora guía mejor a los visitantes hacia el mapa,
+                      el simulador y el juego, con contenidos visuales reales del
+                      Bosque de Pómac.
+                    </p>
+                  </div>
+                  <div className="rounded-3xl border border-white/10 bg-black/25 p-4">
+                    <p className="text-xs text-muted-foreground">Ruta recomendada</p>
+                    <p className="mt-1 text-sm font-medium">
+                      1. Explorar · 2. Jugar · 3. Publicar puntaje · 4. Generar certificado
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
-        </div>
+        </section>
+
+        <section className="mt-12 space-y-5 sm:mt-16">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div className="space-y-2">
+              <p className="text-xs uppercase tracking-[0.3em] text-emerald-100/70">
+                Módulos destacados
+              </p>
+              <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
+                Accesos más visuales y mejor conectados entre sí.
+              </h2>
+            </div>
+            <ButtonLink href="/ranking" variant="secondary" size="sm">
+              Ver ranking global <Trophy className="h-4 w-4" />
+            </ButtonLink>
+          </div>
+
+          <div className="grid gap-4 lg:grid-cols-3">
+            {HOME_SPOTLIGHTS.map((spotlight) => (
+              <Card
+                key={spotlight.title}
+                className="group overflow-hidden border-white/10 bg-black/25"
+              >
+                <CardContent className="p-0">
+                  <div className="relative aspect-[16/11] overflow-hidden">
+                    <Image
+                      src={spotlight.image}
+                      alt={spotlight.alt}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+                    <div className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/35 px-3 py-1 text-[11px] uppercase tracking-[0.25em] text-emerald-100/80 backdrop-blur">
+                      {spotlight.eyebrow}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4 p-5">
+                    <div className="space-y-2">
+                      <h3 className="text-xl font-semibold tracking-tight">{spotlight.title}</h3>
+                      <p className="text-sm leading-6 text-muted-foreground">
+                        {spotlight.description}
+                      </p>
+                    </div>
+
+                    <Link
+                      href={spotlight.href}
+                      className="inline-flex items-center gap-2 text-sm font-medium text-emerald-200 transition-colors hover:text-emerald-100"
+                    >
+                      {spotlight.cta}
+                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <Card className="overflow-hidden border-white/10 bg-white/5">
+            <CardContent className="grid gap-4 p-5 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+              <div className="space-y-3">
+                <p className="inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs text-muted-foreground">
+                  <Sprout className="h-3.5 w-3.5" aria-hidden="true" />
+                  Mejoras responsive
+                </p>
+                <h3 className="text-2xl font-semibold tracking-tight">
+                  Navegación móvil más clara y contenido adaptable para todas las pantallas.
+                </h3>
+                <p className="text-sm leading-6 text-muted-foreground">
+                  Reordenamos la portada en bloques fluidos, incorporamos un video
+                  con carga liviana y reforzamos la transición entre módulos para que
+                  la experiencia se mantenga consistente desde el celular.
+                </p>
+              </div>
+
+              <div className="relative min-h-64 overflow-hidden rounded-[2rem] border border-white/10">
+                <Image
+                  src={POMAC_MEDIA.pyramids}
+                  alt="Pirámides del complejo Sicán en el Bosque de Pómac"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-5">
+                  <p className="text-xs uppercase tracking-[0.25em] text-emerald-100/75">
+                    Patrimonio y paisaje
+                  </p>
+                  <p className="mt-2 max-w-sm text-sm leading-6 text-foreground/90">
+                    El contenido visual ya no es genérico: ahora representa el
+                    bosque, las huacas y la identidad del santuario.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
       </Container>
     </div>
   );

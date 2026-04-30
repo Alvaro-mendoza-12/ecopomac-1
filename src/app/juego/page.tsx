@@ -1,7 +1,7 @@
 import { GameView } from "@/features/game/GameView";
 
 export const metadata = {
-  title: "Juego",
+  title: "Juego Kahoot",
 };
 
 export default function JuegoPage() {
