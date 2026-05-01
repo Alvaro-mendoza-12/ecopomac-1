@@ -51,14 +51,6 @@ const baseStyle: StyleSpecification = {
       maxzoom: 19,
       attribution: "&copy; OpenStreetMap contributors",
     },
-    terrainSource: {
-      type: "raster-dem",
-      tiles: [customDemUrl ?? "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"],
-      tileSize: 256,
-      maxzoom: 14,
-      attribution: "Elevation: AWS Terrain Tiles",
-      encoding: "terrarium",
-    },
   },
   layers: [
     {
@@ -158,11 +150,11 @@ export function EcoMap3D({
       style: useCustomStyle && customStyleUrl ? customStyleUrl : baseStyle,
       center: mapCenter,
       zoom: compact ? 11.2 : 11.8,
-      pitch: compact ? 40 : 45,
-      bearing: compact ? -10 : -15,
+      pitch: 0,
+      bearing: 0,
       attributionControl: {},
       cooperativeGestures: true,
-      antialias: true,
+      antialias: false,
     });
     mapRef.current = map;
     popupRef.current = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 12 });
@@ -182,32 +174,9 @@ export function EcoMap3D({
       }
     });
 
-    map.on("load", () => {
-      map.resize();
-      let canUse3D = true;
-      try {
-        if (!map.getSource("terrainSource")) {
-          map.addSource("terrainSource", {
-            type: "raster-dem",
-            tiles: [customDemUrl ?? "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"],
-            tileSize: 256,
-            maxzoom: 14,
-            encoding: "terrarium",
-          });
-        }
-        map.setTerrain({ source: "terrainSource", exaggeration: terrainBoost });
-        if (!map.getLayer("hillshade")) {
-          map.addLayer({
-            id: "hillshade",
-            type: "hillshade",
-            source: "terrainSource",
-            paint: { "hillshade-shadow-color": "#0b1020", "hillshade-exaggeration": 0.25 },
-          });
-        }
-      } catch {
-        canUse3D = false;
-        setMapError("Terreno 3D no disponible en este entorno. Mostrando mapa estable 2D.");
-      }
+      map.on("load", () => {
+        map.resize();
+        let canUse3D = false;
       if (!map.getLayer("fallback-grid")) {
         map.addSource("fallback-grid-src", {
           type: "geojson",
@@ -448,9 +417,7 @@ export function EcoMap3D({
   }, [isReady, pressure]);
 
   useEffect(() => {
-    const map = mapRef.current;
-    if (!map || !isReady) return;
-    map.setTerrain({ source: "terrainSource", exaggeration: terrainBoost });
+    // Terrain 3D has been removed to match the stable 2D perspective
   }, [isReady, terrainBoost]);
 
   useEffect(() => {
@@ -510,17 +477,8 @@ export function EcoMap3D({
           </div>
 
           <div className="pointer-events-auto rounded-2xl border border-border/70 bg-background/85 px-3 py-2 backdrop-blur">
-            <p className="text-[11px] text-muted-foreground">Terreno 3D</p>
-            <input
-              aria-label="Intensidad de relieve 3D"
-              className="mt-1 w-full accent-emerald-300 sm:w-36"
-              min={1}
-              max={2}
-              step={0.05}
-              type="range"
-              value={terrainBoost}
-              onChange={(e) => setTerrainBoost(Number(e.target.value))}
-            />
+            <p className="text-[11px] text-muted-foreground">Perspectiva</p>
+            <p className="mt-1 text-xs font-medium text-foreground">Mapa estable 2D</p>
           </div>
         </div>
       ) : null}
