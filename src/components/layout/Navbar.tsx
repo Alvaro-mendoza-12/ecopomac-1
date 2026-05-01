@@ -31,15 +31,15 @@ export function Navbar() {
       <Container className="flex h-16 items-center justify-between gap-3">
         <Link
           href="/"
-          className="flex min-w-0 flex-1 items-center gap-3 rounded-full px-2 py-1 hover:bg-white/7 focus-visible:ring-2 focus-visible:ring-ring"
+          className="flex shrink-0 items-center gap-3 rounded-full px-2 py-1 hover:bg-white/7 focus-visible:ring-2 focus-visible:ring-ring"
           aria-label="EcoPómac - Inicio"
         >
           <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald-400/15 text-emerald-200">
             <Leaf className="h-5 w-5" aria-hidden="true" />
           </span>
-          <span className="min-w-0">
-            <span className="block truncate font-semibold tracking-tight">EcoPómac</span>
-            <span className="hidden text-[11px] text-muted-foreground sm:block">
+          <span className="flex flex-col leading-tight">
+            <span className="font-semibold tracking-tight">EcoPómac</span>
+            <span className="hidden text-[10px] text-muted-foreground lg:block xl:text-[11px]">
               Santuario Histórico Bosque de Pómac
             </span>
           </span>

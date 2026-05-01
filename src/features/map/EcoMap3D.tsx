@@ -45,9 +45,7 @@ const baseStyle: StyleSpecification = {
     basemap: {
       type: "raster",
       tiles: [
-        "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        "https://b.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        "https://c.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
       ],
       tileSize: 256,
       maxzoom: 19,
@@ -67,7 +65,7 @@ const baseStyle: StyleSpecification = {
       id: "base-bg",
       type: "background",
       paint: {
-        "background-color": "#dde7dd",
+        "background-color": "#cbd5e1",
       },
     },
     { id: "basemap-raster", type: "raster", source: "basemap", minzoom: 0, maxzoom: 22 },
@@ -159,11 +157,12 @@ export function EcoMap3D({
       container: containerRef.current,
       style: useCustomStyle && customStyleUrl ? customStyleUrl : baseStyle,
       center: mapCenter,
-      zoom: compact ? 10.8 : 11.5,
-      pitch: compact ? 50 : 62,
-      bearing: compact ? -18 : -22,
+      zoom: compact ? 11.2 : 11.8,
+      pitch: compact ? 40 : 45,
+      bearing: compact ? -10 : -15,
       attributionControl: {},
       cooperativeGestures: true,
+      antialias: true,
     });
     mapRef.current = map;
     popupRef.current = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 12 });
