@@ -154,7 +154,6 @@ export function EcoMap3D({
       bearing: 0,
       attributionControl: {},
       cooperativeGestures: true,
-      antialias: false,
     });
     mapRef.current = map;
     popupRef.current = new maplibregl.Popup({ closeButton: false, closeOnClick: false, offset: 12 });
