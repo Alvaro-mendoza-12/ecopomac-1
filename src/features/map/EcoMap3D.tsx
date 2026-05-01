@@ -474,7 +474,12 @@ export function EcoMap3D({
 
   return (
     <div className={cn("relative overflow-hidden rounded-3xl border border-border bg-slate-200 shadow-[0_30px_80px_-45px_rgba(0,0,0,0.9)]", className)}>
-      <div className={cn("relative w-full overflow-hidden rounded-3xl bg-slate-200", compact ? "h-[280px]" : "h-[600px]")}>
+      <div
+        className={cn(
+          "relative w-full overflow-hidden rounded-3xl bg-slate-200",
+          compact ? "h-[300px] sm:h-[320px]" : "h-[420px] sm:h-[540px] lg:h-[640px]",
+        )}
+      >
         <div ref={containerRef} className="absolute inset-0" />
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-transparent" />
         {mapError ? (
@@ -485,10 +490,10 @@ export function EcoMap3D({
       </div>
 
       {showControls ? (
-        <div className="pointer-events-none absolute inset-x-3 top-3 flex flex-wrap items-start justify-between gap-3">
+        <div className="pointer-events-none absolute inset-x-3 top-3 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between">
           <div className="pointer-events-auto rounded-2xl border border-border/70 bg-background/85 px-3 py-2 backdrop-blur">
             <p className="text-[11px] text-muted-foreground">Escenario temporal base</p>
-            <div className="mt-1 flex items-center gap-2 text-xs">
+            <div className="mt-1 flex flex-wrap items-center gap-2 text-xs">
               {ECO_POMAC.years.map((y, idx) => (
                 <button
                   key={y}
@@ -509,7 +514,7 @@ export function EcoMap3D({
             <p className="text-[11px] text-muted-foreground">Terreno 3D</p>
             <input
               aria-label="Intensidad de relieve 3D"
-              className="mt-1 w-36 accent-emerald-300"
+              className="mt-1 w-full accent-emerald-300 sm:w-36"
               min={1}
               max={2}
               step={0.05}
@@ -522,10 +527,20 @@ export function EcoMap3D({
       ) : null}
 
       {!compact ? (
-        <div className="pointer-events-none absolute left-3 top-20 flex flex-wrap gap-2">
+        <div className="pointer-events-none absolute left-3 top-20 hidden flex-wrap gap-2 md:flex">
           <FloatingMetric label="Incendios activos" value={geoData.stats.activeFires} tone="rose" />
           <FloatingMetric label="Area afectada" value={`${geoData.stats.affectedAreaHa} ha`} tone="amber" />
           <FloatingMetric label="Biodiversidad" value={geoData.stats.biodiversityPoints} tone="emerald" />
+        </div>
+      ) : null}
+
+      {!compact ? (
+        <div className="grid gap-2 border-t border-border/70 bg-black/15 p-3 md:hidden">
+          <div className="grid gap-2 sm:grid-cols-3">
+            <FloatingMetric label="Incendios activos" value={geoData.stats.activeFires} tone="rose" />
+            <FloatingMetric label="Area afectada" value={`${geoData.stats.affectedAreaHa} ha`} tone="amber" />
+            <FloatingMetric label="Biodiversidad" value={geoData.stats.biodiversityPoints} tone="emerald" />
+          </div>
         </div>
       ) : null}
 
@@ -542,17 +557,30 @@ export function EcoMap3D({
           </div>
           <AnimatePresence>
             {panelsVisible ? (
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 14 }}
-                transition={{ duration: 0.28, ease: "easeOut" }}
-                className="pointer-events-none absolute inset-3 bottom-14 top-auto grid gap-3 lg:grid-cols-3"
-              >
-                <LayerPanel filters={filters} className="pointer-events-auto" />
-                <LegendPanel className="pointer-events-auto" />
-                <MapStatsPanel stats={geoData.stats} summary={filters.filterSummary} className="pointer-events-auto" />
-              </motion.div>
+              <>
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 14 }}
+                  transition={{ duration: 0.28, ease: "easeOut" }}
+                  className="pointer-events-none absolute inset-3 bottom-14 top-auto hidden gap-3 xl:grid xl:grid-cols-3"
+                >
+                  <LayerPanel filters={filters} className="pointer-events-auto" />
+                  <LegendPanel className="pointer-events-auto" />
+                  <MapStatsPanel stats={geoData.stats} summary={filters.filterSummary} className="pointer-events-auto" />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 12 }}
+                  transition={{ duration: 0.24, ease: "easeOut" }}
+                  className="grid gap-3 border-t border-border/70 bg-black/15 p-3 xl:hidden"
+                >
+                  <LayerPanel filters={filters} />
+                  <LegendPanel />
+                  <MapStatsPanel stats={geoData.stats} summary={filters.filterSummary} />
+                </motion.div>
+              </>
             ) : null}
           </AnimatePresence>
         </>
@@ -635,4 +663,3 @@ function FloatingMetric({
     </div>
   );
 }
-

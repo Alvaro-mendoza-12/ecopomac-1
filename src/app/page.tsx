@@ -33,6 +33,21 @@ const featurePills = [
   },
 ] as const;
 
+const reportInsights = [
+  {
+    title: "Causas principales",
+    text: "El ensayo identifica expansión agrícola, incendios forestales, tala ilegal y sobreexplotación del algarrobo como presiones directas sobre el bosque seco.",
+  },
+  {
+    title: "Impacto ecológico",
+    text: "La pérdida de cobertura vegetal fragmenta hábitats, reduce la resiliencia del ecosistema y amenaza especies nativas en Lambayeque.",
+  },
+  {
+    title: "Respuesta propuesta",
+    text: "La conservación necesita fiscalización, participación comunitaria, restauración y estrategias alineadas con los ODS 13 y 15.",
+  },
+] as const;
+
 export default function Home() {
   return (
     <div className="relative overflow-hidden">
@@ -43,8 +58,8 @@ export default function Home() {
       <div aria-hidden="true" className="noise absolute inset-0 opacity-70" />
 
       <Container className="relative py-12 sm:py-16 lg:py-20">
-        <section className="grid items-start gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
-          <div className="space-y-6">
+        <section className="grid items-start gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-10">
+          <div className="min-w-0 space-y-6">
             <p className="inline-flex items-center gap-2 rounded-full border border-border bg-white/6 px-4 py-2 text-xs text-muted-foreground backdrop-blur">
               {ECO_POMAC.name} · {ECO_POMAC.region}
             </p>
@@ -54,9 +69,10 @@ export default function Home() {
                 Aprende el Bosque de Pómac con imágenes reales, video y retos interactivos.
               </h1>
               <p className="max-w-2xl text-pretty text-base leading-7 text-muted-foreground sm:text-lg">
-                EcoPómac ahora conecta la exploración visual del santuario con un
-                juego más dinámico, simulación ambiental, ranking y generación de
-                certificados en una experiencia optimizada para escritorio y móvil.
+                EcoPómac organiza la información del ensayo ecológico en una
+                experiencia visual que explica causas, impactos y soluciones frente
+                a la deforestación en Lambayeque, combinando mapa, simulación,
+                juego, ranking y certificados.
               </p>
             </div>
 
@@ -97,7 +113,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid gap-4">
+          <div className="min-w-0 grid gap-4">
             <Card className="overflow-hidden border-white/10 bg-black/30">
               <CardContent className="p-0">
                 <div className="relative aspect-[16/10] overflow-hidden">
@@ -177,6 +193,40 @@ export default function Home() {
         </section>
 
         <section className="mt-12 space-y-5 sm:mt-16">
+          <div className="space-y-4 rounded-[2rem] border border-white/10 bg-black/20 p-5 sm:p-6">
+            <div className="space-y-2">
+              <p className="text-xs uppercase tracking-[0.3em] text-emerald-100/70">
+                Hallazgos del ensayo
+              </p>
+              <h2 className="text-balance text-2xl font-semibold tracking-tight sm:text-3xl">
+                Ideas clave para explicar la problemática con claridad frente al aula.
+              </h2>
+              <p className="max-w-3xl text-sm leading-6 text-muted-foreground sm:text-base">
+                El contenido visible de la portada ya resume los puntos centrales del
+                informe: fragilidad del bosque seco, presión humana sobre el
+                territorio y necesidad de soluciones sostenibles.
+              </p>
+            </div>
+
+            <div className="grid gap-4 lg:grid-cols-3">
+              {reportInsights.map((insight, index) => (
+                <Card key={insight.title} className="border-white/10 bg-white/[0.04]">
+                  <CardContent className="space-y-4 p-5">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-emerald-400/12 text-sm font-semibold text-emerald-100">
+                      0{index + 1}
+                    </span>
+                    <div className="space-y-2">
+                      <h3 className="text-lg font-semibold tracking-tight">{insight.title}</h3>
+                      <p className="text-sm leading-6 text-muted-foreground">
+                        {insight.text}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div className="space-y-2">
               <p className="text-xs uppercase tracking-[0.3em] text-emerald-100/70">
@@ -234,7 +284,7 @@ export default function Home() {
           </div>
 
           <Card className="overflow-hidden border-white/10 bg-white/5">
-            <CardContent className="grid gap-4 p-5 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+            <CardContent className="grid gap-4 p-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center">
               <div className="space-y-3">
                 <p className="inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs text-muted-foreground">
                   <Sprout className="h-3.5 w-3.5" aria-hidden="true" />
@@ -245,8 +295,9 @@ export default function Home() {
                 </h3>
                 <p className="text-sm leading-6 text-muted-foreground">
                   Reordenamos la portada en bloques fluidos, incorporamos un video
-                  con carga liviana y reforzamos la transición entre módulos para que
-                  la experiencia se mantenga consistente desde el celular.
+                  con carga liviana y sumamos datos breves del ensayo para que la
+                  exposición mantenga claridad tanto en celular como en pantalla
+                  proyectada.
                 </p>
               </div>
 

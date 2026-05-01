@@ -43,7 +43,7 @@ export default async function CertificatePublicPage({
 
   return (
     <Container className="py-14">
-      <div className="max-w-3xl">
+      <div className="max-w-4xl">
         <Card className="overflow-hidden">
           <CardHeader>
             <p className="text-xs text-muted-foreground">EcoPómac</p>
@@ -53,7 +53,7 @@ export default async function CertificatePublicPage({
             <p className="text-xs text-muted-foreground">{createdAt}</p>
           </CardHeader>
           <CardContent>
-            <div className="rounded-3xl border border-border bg-white p-8 text-zinc-950">
+            <div className="rounded-[2rem] border border-border bg-white p-5 text-zinc-950 sm:p-8">
               {data.public_url ? (
                 <div className="mb-6">
                   {/* eslint-disable-next-line @next/next/no-img-element */}

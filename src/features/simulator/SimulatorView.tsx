@@ -3,8 +3,10 @@
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useMemo, useState } from "react";
+import { PageHero } from "@/components/content/PageHero";
 import { Container } from "@/components/layout/Container";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";
+import { ButtonLink } from "@/components/ui/Button";
 import { ECO_POMAC, type EcoPomacYear } from "@/lib/constants";
 import { SIMULATOR_STATS } from "@/features/simulator/simData";
 import { cn } from "@/lib/cn";
@@ -39,19 +41,37 @@ export function SimulatorView() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(1000px_650px_at_20%_0%,rgba(52,211,153,0.18),transparent_65%),radial-gradient(1000px_650px_at_90%_10%,rgba(251,191,36,0.10),transparent_60%)]"
       />
       <Container className="relative py-14">
-        <div className="max-w-2xl space-y-3">
-          <h1 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Simulador de Deforestación
-          </h1>
-          <p className="text-pretty text-muted-foreground">
-            Desliza la línea temporal para observar la pérdida forestal y su
-            impacto. Los valores son educativos (no oficiales).
-          </p>
-          <p className="text-xs text-emerald-200/80">
-            Contexto Lambayeque-Chiclayo: la presión por cambio de uso de suelo
-            aumenta la fragmentación del bosque seco.
-          </p>
-        </div>
+        <PageHero
+          eyebrow="Simulación ambiental"
+          title="Observa cómo cambia la presión sobre el bosque seco entre 2000 y 2030."
+          description="Esta vista traduce el ensayo a una lectura rápida: cuando aumenta la pérdida de cobertura forestal, también crecen la fragmentación del hábitat, el riesgo para la biodiversidad y la presión climática."
+          note="El ensayo relaciona la deforestación con cambio de uso del suelo, incendios forestales y tala ilegal, especialmente en ecosistemas frágiles de Lambayeque."
+          actions={
+            <>
+              <ButtonLink href="/mapa" size="lg">
+                Ver mapa relacionado
+              </ButtonLink>
+              <ButtonLink href="/estadisticas" variant="secondary" size="lg">
+                Abrir panel estadístico
+              </ButtonLink>
+            </>
+          }
+          stats={[
+            { label: "Cobertura del año", value: `${stats.forestCoverPct}%` },
+            { label: "Presión ecológica", value: `${pressure}%` },
+            { label: "Rango temporal", value: "2000 → 2030" },
+          ]}
+          aside={
+            <div className="rounded-[1.8rem] border border-white/10 bg-black/25 p-5">
+              <p className="text-sm font-medium">Cómo explicarlo en clase</p>
+              <div className="mt-3 grid gap-2 text-sm text-muted-foreground">
+                <p>1. Muestra el año seleccionado.</p>
+                <p>2. Relaciona cobertura forestal con pérdida de biodiversidad.</p>
+                <p>3. Compara 2010 y 2030 para evidenciar la aceleración del impacto.</p>
+              </div>
+            </div>
+          }
+        />
 
         <div className="mt-10 grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
           <Card className="overflow-hidden">
@@ -83,7 +103,7 @@ export function SimulatorView() {
                   setYear(ECO_POMAC.years[idx] ?? 2020);
                 }}
               />
-              <div className="flex items-center justify-between text-xs text-muted-foreground">
+              <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
                 {ECO_POMAC.years.map((y) => (
                   <span key={y} className={cn(y === year && "text-foreground")}>
                     {y}
@@ -146,7 +166,7 @@ export function SimulatorView() {
               </CardHeader>
               <CardContent>
                 <motion.div
-                  className="relative h-44 overflow-hidden rounded-3xl border border-border bg-gradient-to-b from-sky-300/20 via-emerald-300/10 to-amber-300/10"
+                  className="relative h-48 overflow-hidden rounded-3xl border border-border bg-gradient-to-b from-sky-300/20 via-emerald-300/10 to-amber-300/10 sm:h-44"
                   initial={false}
                   animate={{
                     boxShadow:

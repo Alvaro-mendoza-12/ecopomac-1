@@ -67,7 +67,12 @@ const affectedPolygon: [number, number][][] = [
 export function StableLeafletMap({ compact, className }: StableLeafletMapProps) {
   return (
     <div className={cn("overflow-hidden rounded-3xl border border-border bg-slate-200", className)}>
-      <div className={cn("w-full", compact ? "h-[280px]" : "h-[600px]")}>
+      <div
+        className={cn(
+          "w-full",
+          compact ? "h-[300px] sm:h-[320px]" : "h-[420px] sm:h-[540px] lg:h-[600px]",
+        )}
+      >
         <MapContainer center={center} zoom={12} scrollWheelZoom className="h-full w-full">
           <TileLayer
             attribution='&copy; OpenStreetMap'
@@ -98,4 +103,3 @@ export function StableLeafletMap({ compact, className }: StableLeafletMapProps) 
     </div>
   );
 }
-

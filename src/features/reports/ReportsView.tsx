@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { PageHero } from "@/components/content/PageHero";
 import { Container } from "@/components/layout/Container";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -93,15 +94,27 @@ export function ReportsView() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(950px_520px_at_18%_0%,rgba(52,211,153,0.16),transparent_62%),radial-gradient(950px_520px_at_92%_20%,rgba(251,113,133,0.10),transparent_60%)]"
       />
       <Container className="relative py-14">
-        <div className="max-w-2xl space-y-3">
-          <h1 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Sistema de Reportes
-          </h1>
-          <p className="text-pretty text-muted-foreground">
-            Denuncia incidentes ambientales. Esta versión está optimizada para
-            demo universitaria; para producción se recomienda base de datos.
-          </p>
-        </div>
+        <PageHero
+          eyebrow="Participación comunitaria"
+          title="Convierte la preocupación ambiental en acción reportable."
+          description="El ensayo subraya que la conservación requiere vigilancia, respuesta institucional y participación social. Este módulo representa esa idea con un flujo simple para reportar incidentes ambientales."
+          note="Funciona bien para explicar que la tecnología no solo informa: también puede apoyar prevención, monitoreo y organización comunitaria."
+          stats={[
+            { label: "Reportes posibles", value: "Tala, incendios y contaminación" },
+            { label: "Propósito", value: "Prevención y seguimiento" },
+            { label: "Uso en demo", value: "Flujo completo con Supabase" },
+          ]}
+          aside={
+            <div className="rounded-[1.8rem] border border-white/10 bg-black/25 p-5">
+              <p className="text-sm font-medium">Qué conviene mencionar</p>
+              <div className="mt-3 grid gap-2 text-sm text-muted-foreground">
+                <p>1. Qué pasó.</p>
+                <p>2. Dónde ocurrió.</p>
+                <p>3. Por qué registrar evidencia ayuda a la conservación.</p>
+              </div>
+            </div>
+          }
+        />
 
         <div className="mt-10 grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
           <Card>

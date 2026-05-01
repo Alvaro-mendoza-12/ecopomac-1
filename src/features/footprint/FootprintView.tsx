@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { useMemo } from "react";
+import { PageHero } from "@/components/content/PageHero";
 import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 import { Container } from "@/components/layout/Container";
@@ -55,15 +56,27 @@ export function FootprintView() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_520px_at_18%_0%,rgba(52,211,153,0.16),transparent_62%),radial-gradient(900px_520px_at_90%_20%,rgba(176,137,104,0.14),transparent_60%)]"
       />
       <Container className="relative py-14">
-        <div className="max-w-2xl space-y-3">
-          <h1 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Calculadora de Huella Ecológica
-          </h1>
-          <p className="text-pretty text-muted-foreground">
-            Estima tu puntaje ambiental con base en hábitos cotidianos. Modelo
-            educativo (no clínico) para reflexión y mejora.
-          </p>
-        </div>
+        <PageHero
+          eyebrow="Impacto personal"
+          title="Convierte hábitos cotidianos en una lectura simple de huella ecológica."
+          description="Este módulo ayuda a conectar la problemática regional con decisiones personales sobre transporte, consumo de papel y energía. Funciona bien como pausa participativa durante la exposición."
+          note="El ensayo remarca que la sostenibilidad también depende de cambiar prácticas humanas que presionan los ecosistemas."
+          stats={[
+            { label: "Variables medidas", value: "Transporte, papel y energía" },
+            { label: "Escala", value: "0 a 100 puntos" },
+            { label: "Uso recomendado", value: "Interacción rápida con el público" },
+          ]}
+          aside={
+            <div className="rounded-[1.8rem] border border-white/10 bg-black/25 p-5">
+              <p className="text-sm font-medium">Idea para presentar</p>
+              <div className="mt-3 grid gap-2 text-sm text-muted-foreground">
+                <p>1. Pide un ejemplo de consumo al público.</p>
+                <p>2. Ajusta los valores en vivo.</p>
+                <p>3. Relaciona el resultado con hábitos más sostenibles.</p>
+              </div>
+            </div>
+          }
+        />
 
         <div className="mt-10 grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
           <Card>
@@ -137,7 +150,7 @@ export function FootprintView() {
             <CardContent>
               <div className="rounded-3xl border border-border bg-white/4 p-6">
                 <div className="flex items-baseline justify-between gap-6">
-                  <p className="text-5xl font-semibold tracking-tight">{s}</p>
+                  <p className="text-4xl font-semibold tracking-tight sm:text-5xl">{s}</p>
                   <p className="text-sm text-muted-foreground">
                     {s >= 80
                       ? "Excelente"

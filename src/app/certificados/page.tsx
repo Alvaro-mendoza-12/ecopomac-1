@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
+import { PageHero } from "@/components/content/PageHero";
 import { Container } from "@/components/layout/Container";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -45,14 +46,26 @@ export default function CertificadosPage() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(950px_520px_at_18%_0%,rgba(52,211,153,0.16),transparent_62%),radial-gradient(950px_520px_at_92%_20%,rgba(176,137,104,0.12),transparent_60%)]"
       />
       <Container className="relative py-14">
-        <div className="max-w-2xl space-y-3">
-          <h1 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Certificados digitales
-          </h1>
-          <p className="text-pretty text-muted-foreground">
-            Genera un certificado imprimible para la presentación universitaria.
-          </p>
-        </div>
+        <PageHero
+          eyebrow="Cierre de exposición"
+          title="Genera un certificado visualmente más sólido y fácil de compartir."
+          description="Esta sección sirve como remate de la experiencia: muestra participación, puntaje y una evidencia exportable para PDF o enlace público."
+          note="El certificado funciona mejor al final del recorrido, después del juego y del ranking."
+          stats={[
+            { label: "Salida", value: "Impresión, PDF o enlace público" },
+            { label: "Puntaje detectado", value: best === null ? "Aún no disponible" : `${best} puntos` },
+            { label: "Uso ideal", value: "Cierre formal de la demo" },
+          ]}
+          aside={
+            <div className="rounded-[1.8rem] border border-white/10 bg-black/25 p-5">
+              <p className="text-sm font-medium">Consejo de presentación</p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                Puedes personalizar el nombre en vivo y exportar el diploma como
+                PDF para cerrar la exposición con una evidencia concreta.
+              </p>
+            </div>
+          }
+        />
 
         <div className="mt-10 grid gap-4 lg:grid-cols-[1fr_1fr]">
           <Card>
@@ -185,14 +198,22 @@ export default function CertificadosPage() {
             <CardContent>
               <div
                 ref={certRef}
-                className="rounded-3xl border border-border bg-white p-8 text-zinc-950"
+                className="mx-auto flex min-h-[520px] max-w-[560px] flex-col justify-between rounded-[2rem] border border-border bg-white p-5 text-zinc-950 sm:min-h-[660px] sm:p-8"
               >
-                <div className="space-y-4">
+                <div className="space-y-5">
                   <div className="flex items-center justify-between">
                     <p className="text-xs font-semibold tracking-wide text-emerald-800">
                       EcoPómac
                     </p>
                     <p className="text-xs text-zinc-600">{today}</p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="rounded-full bg-emerald-100 px-3 py-1 text-[11px] font-medium text-emerald-900">
+                      Conservación ambiental
+                    </span>
+                    <span className="rounded-full bg-amber-100 px-3 py-1 text-[11px] font-medium text-amber-900">
+                      ODS 13 y ODS 15
+                    </span>
                   </div>
                   <h2 className="text-2xl font-semibold tracking-tight">
                     Certificado de participación
@@ -212,7 +233,7 @@ export default function CertificadosPage() {
                     <p className="text-2xl font-semibold">{best ?? "—"}</p>
                   </div>
 
-                  <div className="pt-6">
+                  <div className="mt-auto pt-6">
                     <div className="h-px bg-zinc-200" />
                     <div className="mt-2 flex items-center justify-between">
                       <p className="text-xs text-zinc-600">Docente / Curso</p>

@@ -314,7 +314,7 @@ export function GameView() {
                         Tendrás preguntas con tiempo limitado, respuestas de gran
                         formato al estilo concurso y retroalimentación instantánea
                         sobre conservación, turismo responsable y patrimonio del
-                        Bosque de Pómac.
+                        Bosque de Pómac, usando ideas tomadas del ensayo del grupo.
                       </p>
                     </div>
 
@@ -695,7 +695,7 @@ function AnswerTile({
       disabled={revealed}
       onClick={onSelect}
       className={cn(
-        "group relative min-h-44 rounded-[2rem] border p-5 text-left transition-all focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-default",
+        "group relative min-h-36 rounded-[2rem] border p-5 text-left transition-all focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-default sm:min-h-44",
         revealed ? revealedClassName : decor.className,
         !revealed && "hover:-translate-y-0.5 hover:shadow-[0_18px_35px_-24px_rgba(15,23,42,0.8)]",
         selected && !revealed && "ring-2 ring-white/60",

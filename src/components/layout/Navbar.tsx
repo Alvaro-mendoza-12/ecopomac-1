@@ -6,6 +6,7 @@ import { Leaf, Menu, Moon, X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/cn";
 import { Container } from "@/components/layout/Container";
+import { ButtonLink } from "@/components/ui/Button";
 import { AuthButton } from "@/features/auth/AuthButton";
 import { useAppTheme } from "@/lib/theme";
 
@@ -30,17 +31,21 @@ export function Navbar() {
       <Container className="flex h-16 items-center justify-between gap-3">
         <Link
           href="/"
-          onClick={() => setMenuOpen(false)}
-          className="flex min-w-0 items-center gap-2 rounded-full px-2 py-1 hover:bg-white/7 focus-visible:ring-2 focus-visible:ring-ring"
+          className="flex min-w-0 flex-1 items-center gap-3 rounded-full px-2 py-1 hover:bg-white/7 focus-visible:ring-2 focus-visible:ring-ring"
           aria-label="EcoPómac - Inicio"
         >
           <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-emerald-400/15 text-emerald-200">
             <Leaf className="h-5 w-5" aria-hidden="true" />
           </span>
-          <span className="truncate font-semibold tracking-tight">EcoPómac</span>
+          <span className="min-w-0">
+            <span className="block truncate font-semibold tracking-tight">EcoPómac</span>
+            <span className="hidden text-[11px] text-muted-foreground sm:block">
+              Santuario Histórico Bosque de Pómac
+            </span>
+          </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Navegación">
+        <nav className="hidden items-center gap-1 lg:flex" aria-label="Navegación">
           {navItems.map((item) => {
             const active = pathname === item.href;
             return (
@@ -48,7 +53,7 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "rounded-full px-3 py-2 text-sm transition-colors hover:bg-white/7 focus-visible:ring-2 focus-visible:ring-ring",
+                  "rounded-full px-3 py-2 text-[13px] transition-colors hover:bg-white/7 focus-visible:ring-2 focus-visible:ring-ring xl:text-sm",
                   active && "bg-white/9",
                 )}
                 aria-current={active ? "page" : undefined}
@@ -59,7 +64,10 @@ export function Navbar() {
           })}
         </nav>
 
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-2 lg:flex">
+          <ButtonLink href="/explorar" variant="secondary" size="sm">
+            Presentación
+          </ButtonLink>
           <AuthButton />
           <ThemeToggleButton
             theme={theme}
@@ -68,7 +76,7 @@ export function Navbar() {
           />
         </div>
 
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex shrink-0 items-center gap-2 lg:hidden">
           <ThemeToggleButton
             theme={theme}
             toggleTheme={toggleTheme}
@@ -92,16 +100,36 @@ export function Navbar() {
       </Container>
 
       {menuOpen ? (
-        <div id="mobile-nav" className="border-t border-border bg-background/95 md:hidden">
+        <div id="mobile-nav" className="border-t border-border bg-background/95 lg:hidden">
           <Container className="py-4">
-            <nav className="grid gap-2" aria-label="Navegación móvil">
+            <div className="rounded-[1.8rem] border border-white/10 bg-white/4 p-4">
+              <p className="text-sm font-medium">Ruta sugerida para exponer</p>
+              <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                Empieza con la vista general, pasa por el simulador y cierra con el
+                juego, ranking y certificados.
+              </p>
+              <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+                <ButtonLink href="/explorar" size="sm" onClick={() => setMenuOpen(false)}>
+                  Abrir recorrido
+                </ButtonLink>
+                <ButtonLink
+                  href="/juego"
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Ir al juego
+                </ButtonLink>
+              </div>
+            </div>
+
+            <nav className="mt-4 grid gap-2 sm:grid-cols-2" aria-label="Navegación móvil">
               {navItems.map((item) => {
                 const active = pathname === item.href;
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    onClick={() => setMenuOpen(false)}
                     className={cn(
                       "rounded-2xl border border-transparent bg-white/4 px-4 py-3 text-sm transition-colors hover:bg-white/8 focus-visible:ring-2 focus-visible:ring-ring",
                       active && "border-white/10 bg-white/10",

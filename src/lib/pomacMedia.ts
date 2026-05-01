@@ -53,15 +53,15 @@ export const HOME_SPOTLIGHTS: PomacSpotlight[] = [
 
 export const HOME_METRICS = [
   {
-    value: "3 experiencias",
-    label: "Aprender, visualizar y competir",
+    value: "13 zonas de vida",
+    label: "Lambayeque concentra una gran diversidad ecológica",
   },
   {
-    value: "1 reto central",
-    label: "Juego conectado con ranking y certificados",
+    value: "7 000–10 000 ha/año",
+    label: "Rango reportado de presión por deforestación en la región",
   },
   {
-    value: "Media real",
-    label: "Fotos y video del Bosque de Pómac desde IMG",
+    value: "ODS 13 y 15",
+    label: "Cambio climático y vida de ecosistemas terrestres",
   },
 ] as const;

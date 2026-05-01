@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { PageHero } from "@/components/content/PageHero";
 import { Container } from "@/components/layout/Container";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -84,14 +85,27 @@ export function LeaderboardView({
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(950px_520px_at_18%_0%,rgba(52,211,153,0.16),transparent_62%),radial-gradient(950px_520px_at_92%_20%,rgba(163,230,53,0.10),transparent_60%)]"
       />
       <Container className="relative py-14">
-        <div className="max-w-2xl space-y-3">
-          <h1 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Ranking global
-          </h1>
-          <p className="text-pretty text-muted-foreground">
-            Ranking persistente en Supabase con Realtime.
-          </p>
-        </div>
+        <PageHero
+          eyebrow="Cierre competitivo"
+          title="Muestra resultados, participación y continuidad del proyecto."
+          description="El ranking le da ritmo a la exposición porque convierte el juego en evidencia visible de participación. Además, demuestra conexión con Supabase y actualización en tiempo real."
+          note="Puedes usarlo al final para que la audiencia vea quién obtuvo el mejor puntaje y cómo la experiencia no termina en una sola pantalla."
+          stats={[
+            { label: "Persistencia", value: "Supabase + Realtime" },
+            { label: "Ranking visible", value: "Top 25" },
+            { label: "Puntaje local", value: localBest === null ? "Aún no registrado" : `${localBest} puntos` },
+          ]}
+          aside={
+            <div className="rounded-[1.8rem] border border-white/10 bg-black/25 p-5">
+              <p className="text-sm font-medium">Sugerencia para la demo</p>
+              <div className="mt-3 grid gap-2 text-sm text-muted-foreground">
+                <p>1. Juega una ronda corta.</p>
+                <p>2. Publica el mejor puntaje.</p>
+                <p>3. Abre esta vista para cerrar con participación real.</p>
+              </div>
+            </div>
+          }
+        />
 
         <div className="mt-10 grid gap-4 lg:grid-cols-[1fr_1fr]">
           <Card>
@@ -158,6 +172,27 @@ export function LeaderboardView({
               </p>
             </CardHeader>
             <CardContent className="space-y-3">
+              {rows.length > 0 ? (
+                <div className="grid gap-3 sm:grid-cols-3">
+                  {rows.slice(0, 3).map((r, idx) => (
+                    <div
+                      key={`${r.user_id}-podium`}
+                      className="rounded-[1.8rem] border border-white/10 bg-black/20 p-4"
+                    >
+                      <p className="text-xs uppercase tracking-[0.24em] text-emerald-100/70">
+                        #{idx + 1}
+                      </p>
+                      <p className="mt-2 truncate text-sm font-medium">
+                        {r.profiles?.display_name ?? "Usuario"}
+                      </p>
+                      <p className="mt-1 text-2xl font-semibold tracking-tight">
+                        {r.best_score}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+
               {rows.length === 0 ? (
                 <div className="rounded-3xl border border-border bg-white/4 p-5 text-sm text-muted-foreground">
                   Sin datos aún.

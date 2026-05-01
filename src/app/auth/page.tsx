@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { PageHero } from "@/components/content/PageHero";
 import { Container } from "@/components/layout/Container";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -46,14 +47,25 @@ export default function AuthPage() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(950px_520px_at_18%_0%,rgba(52,211,153,0.16),transparent_62%),radial-gradient(950px_520px_at_92%_20%,rgba(176,137,104,0.12),transparent_60%)]"
       />
       <Container className="relative py-14">
-        <div className="max-w-2xl space-y-3">
-          <h1 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-            Acceso
-          </h1>
-          <p className="text-pretty text-muted-foreground">
-            Inicia sesión para persistir reportes, ranking global y certificados.
-          </p>
-        </div>
+        <PageHero
+          eyebrow="Cuenta EcoPómac"
+          title="Activa funciones persistentes para tu demo y tu equipo."
+          description="El acceso permite guardar puntajes, publicar en el ranking global y registrar certificados. La interfaz quedó más clara para que no corte el ritmo de la exposición si necesitan iniciar sesión en vivo."
+          stats={[
+            { label: "Conecta", value: "Ranking, reportes y certificados" },
+            { label: "Seguridad", value: "Supabase Auth + RLS" },
+            { label: "Uso recomendado", value: "Antes de exponer o en una pausa breve" },
+          ]}
+          aside={
+            <div className="rounded-[1.8rem] border border-white/10 bg-black/25 p-5">
+              <p className="text-sm font-medium">Sugerencia</p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                Si van a mostrar ranking o certificados en vivo, conviene dejar una
+                sesión lista antes de empezar la presentación.
+              </p>
+            </div>
+          }
+        />
 
         <div className="mt-10 grid gap-4 lg:grid-cols-[0.95fr_1.05fr]">
           <Card>
@@ -204,15 +216,9 @@ export default function AuthPage() {
               <p className="text-xs text-muted-foreground">RLS habilitado</p>
             </CardHeader>
             <CardContent className="space-y-2 text-sm text-muted-foreground">
-              <p>
-                - Tu sesión se guarda de forma segura en el navegador.
-              </p>
-              <p>
-                - Los reportes y puntajes se protegen con Row Level Security.
-              </p>
-              <p>
-                - Los certificados pueden ser públicos para compartir en la presentación.
-              </p>
+              <p>Tu sesión se guarda de forma segura en el navegador.</p>
+              <p>Los reportes y puntajes se protegen con Row Level Security.</p>
+              <p>Los certificados pueden hacerse públicos para compartir la exposición.</p>
             </CardContent>
           </Card>
         </div>
