@@ -440,6 +440,7 @@ export function EcoMap3D({
 
   return (
     <div className={cn("relative overflow-hidden rounded-3xl border border-border bg-slate-200 shadow-[0_30px_80px_-45px_rgba(0,0,0,0.9)]", className)}>
+      <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
       <div
         className={cn(
           "relative w-full overflow-hidden rounded-3xl bg-slate-200",
@@ -620,3 +621,4 @@ function FloatingMetric({
     </div>
   );
 }
+

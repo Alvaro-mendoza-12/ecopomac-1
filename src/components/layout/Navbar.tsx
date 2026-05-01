@@ -38,8 +38,8 @@ export function Navbar() {
             <Leaf className="h-5 w-5" aria-hidden="true" />
           </span>
           <span className="flex flex-col leading-tight">
-            <span className="font-semibold tracking-tight">EcoPómac</span>
-            <span className="hidden text-[10px] text-muted-foreground lg:block xl:text-[11px]">
+            <span className="font-semibold tracking-tight whitespace-nowrap">EcoPómac</span>
+            <span className="hidden text-[10px] text-muted-foreground whitespace-nowrap lg:block xl:text-[11px]">
               Santuario Histórico Bosque de Pómac
             </span>
           </span>

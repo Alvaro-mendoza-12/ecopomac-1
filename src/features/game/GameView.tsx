@@ -241,7 +241,7 @@ export function GameView() {
             </p>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="grid shrink-0 gap-3 sm:grid-cols-3">
             <SummaryChip label="Preguntas" value={`${totalQuestions}`} />
             <SummaryChip label="Racha actual" value={`${streak}`} />
             <SummaryChip
@@ -333,11 +333,11 @@ export function GameView() {
                       </p>
                     </div>
 
-                    <div className="flex flex-col gap-3 sm:flex-row">
-                      <Button type="button" size="lg" onClick={beginChallenge}>
+                    <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                      <Button type="button" size="lg" className="whitespace-nowrap" onClick={beginChallenge}>
                         Empezar desafío <PlayCircle className="h-4 w-4" />
                       </Button>
-                      <ButtonLink href="/ranking" variant="secondary" size="lg">
+                      <ButtonLink href="/ranking" variant="secondary" size="lg" className="whitespace-nowrap">
                         Ver ranking global <ArrowRight className="h-4 w-4" />
                       </ButtonLink>
                     </div>
